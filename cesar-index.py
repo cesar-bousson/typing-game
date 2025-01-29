@@ -10,38 +10,44 @@ pygame.init()
 #- des fruits son [affiché] en mouvement (apparraissent et disparraissent)
 #- un fruit peut etre [coupé] lorsqu'on [appui sur clavier] sur sa [lettre] correspondante : definir lettre pour fruit
 
+
+# centrer image : x et y de image = x et y screen sur position 0.0 de screen
+
+
 #define the screen:
 
-pygame.display.set_caption("FRUITIX SLICER")
 background = pygame.image.load("assets/pictures/bg/bg_1.png")
-background_width, background_height = background.get_size()
-screen = pygame.display.set_mode((background_height, background_width))
+x_bg, y_bg = background.get_size()
+screen = pygame.display.set_mode((x_bg/2.5, y_bg/2.5)) #screen for mobile
+pygame.display.set_caption("FRUITIX SLICER")
 
-class Fruit:
+
+
+# class Fruit:
     
-    def __init__(self, type, value,):
-        # slice_fruit()
-        self.type = type
-        self.value = value 
+#     def __init__(self, type, value,):
+#         # slice_fruit()
+#         self.type = type
+#         self.value = value 
         
-fruit_1 = Fruit("orange",2)
-fruit_2 = Fruit("watermelon",1)
-fruit_3 = Fruit("mango",4)
-fruit_4 = Fruit("peach",2)
-fruit_5 = Fruit("banana",1)
-fruit_6 = Fruit("bomb",-4)
-fruit_7 = Fruit("ice",0)
+# fruit_1 = Fruit("orange",2)
+# fruit_2 = Fruit("watermelon",1)
+# fruit_3 = Fruit("mango",4)
+# fruit_4 = Fruit("peach",2)
+# fruit_5 = Fruit("banana",1)
+# fruit_6 = Fruit("bomb",-4)
+# fruit_7 = Fruit("ice",0)
 
-def display_fruits():
-    fruit_pictures = {
-        pygame.image.load(""),
-        pygame.image.load(""),
-        pygame.image.load(""),
-        pygame.image.load(""),
-        pygame.image.load(""),
-        pygame.image.load(""),
-        pygame.image.load(""),
-}
+# def display_fruits():
+#     fruit_pictures = {
+#         pygame.image.load(""),
+#         pygame.image.load(""),
+#         pygame.image.load(""),
+#         pygame.image.load(""),
+#         pygame.image.load(""),
+#         pygame.image.load(""),
+#         pygame.image.load(""),
+# }
     
 # def display_bomb():
     
@@ -58,18 +64,20 @@ def display_fruits():
         
 
 #main_loop:
-running = True
+
 
 def main_loop():
-    
-    screen.blit(background(background_width, background_height))
+    running = True
+    screen.blit(background, (x_bg, y_bg))
     
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-                
-    
-    pygame.display.flip()        
+                   
+    pygame.display.flip() 
+       
 
-pygame.quit()
+    pygame.quit()
+
+main_loop()
