@@ -7,6 +7,8 @@ WIDTH = 1080
 HEIGHT = 720
 screen = pygame.display.set_mode((WIDTH,HEIGHT))
 
+collicount = 0
+
 """----------------------- S P A W N I N G  M A N A G E M E N T ----------------------------"""
 
 xrAbricot = int(random.choice([200,400,600,800]))
@@ -81,47 +83,55 @@ while running:
     
     """---------------------------- C O N T A C T  M A N A G E M E N T --------------------------------"""
 
+
     if abricot.collidelist([banane,figue,fraise,mangue,orange,pasteque,poire]) != -1:
-        print("CONTACT TOP")
+        collicount += 1
+        print(collicount)
         xAbricot = -xAbricot
         yAbricot = -yAbricot
     
     if banane.collidelist([abricot,figue,fraise,mangue,orange,pasteque,poire]) != -1:
-        print("CONTACT TOP")
+        collicount += 1
+        print(collicount)
         xBanane = -xBanane
         yBanane = -yBanane
     
     if figue.collidelist([abricot,banane,fraise,mangue,orange,pasteque,poire]) != -1:
-        print("CONTACT LEFT")
+        collicount += 1
+        print(collicount)
         xFigue = -xFigue
         yFigue = -yFigue
 
     if fraise.collidelist([abricot,banane,figue,mangue,orange,pasteque,poire]) != -1:
-        print("CONTACT LEFT")
+        collicount += 1
+        print(collicount)
         xFraise = -xFraise
         yFraise = -yFraise
 
     if mangue.collidelist([abricot,banane,figue,fraise,orange,pasteque,poire]) != -1:
-        print("CONTACT DOWN")
+        collicount += 1
+        print(collicount)
         xMangue = -xMangue
         yMangue = -yMangue
 
     if orange.collidelist([abricot,banane,figue,fraise,mangue,pasteque,poire]) != -1:
-        print("CONTACT DOWN")
+        collicount += 1
+        print(collicount)
         xOrange = -xOrange
         yOrange = -yOrange
 
     if pasteque.collidelist([abricot,banane,figue,fraise,mangue,orange,poire]) != -1:
-        print("CONTACT RIGHT")
+        collicount += 1
+        print(collicount)
         xPasteque = -xPasteque
         yPasteque = -yPasteque
         
     if poire.collidelist([abricot,banane,figue,fraise,mangue,orange,pasteque]) != -1:
-        print("CONTACT RIGHT")
+        collicount += 1
+        print(collicount)
         xPoire = -xPoire
         yPoire = -yPoire
     
-    print(xrAbricot)
 
     """---------------------------- M O V E M E N T S --------------------------------"""
 
@@ -148,48 +158,76 @@ while running:
     pygame.draw.rect(screen,(0,255,0),orange,2)
     pygame.draw.rect(screen,(0,0,255),pasteque,2)
     pygame.draw.rect(screen,(0,150,250),poire,2)
-    
-    if abricot.x > 1230 or abricot.y > 870 or abricot.x < -150 or abricot.y < -150:
+
+
+    """------------------- S P A W N I N G  M A N A G E M E N T ---------------------"""
+
+    if abricot.x > 1330 or abricot.y > 970 or abricot.x < -250 or abricot.y < -250:
         abricot.x = int(random.choice([200,400,600,800]))
         abricot.y = 0
         xAbricot = -xAbricot
         yAbricot = -yAbricot
-    if banane.x > 1230 or banane.y > 870 or banane.x < -150 or banane.y < -150:
+    if banane.x > 1330 or banane.y > 970 or banane.x < -250 or banane.y < -250:
         banane.x = int(random.choice([300,500,700,900]))
         banane.y = 0
         xBanane = -xBanane
         yBanane = -yBanane
-    if figue.x > 1230 or figue.y > 870 or figue.x < -150 or figue.y < -150:
+    if figue.x > 1330 or figue.y > 970 or figue.x < -250 or figue.y < -250:
         figue.x = 0
         figue.y = int(random.choice([100,400,600]))
         xFigue = -xFigue
         yFigue = -yFigue
-    if fraise.x > 1230 or fraise.y > 870 or fraise.x < -150 or fraise.y < -150:
+    if fraise.x > 1330 or fraise.y > 970 or fraise.x < -250 or fraise.y < -250:
         fraise.x = 0
         fraise.y = int(random.choice([200,300,500]))
         xFraise = -xFraise
         yFraise = -yFraise
-    if mangue.x > 1230 or mangue.y > 870 or mangue.x < -150 or mangue.y < -150:
+    if mangue.x > 1330 or mangue.y > 970 or mangue.x < -250 or mangue.y < -250:
         mangue.x = int(random.choice([200,400,600,800]))
         mangue.y = 670
         xMangue = -xMangue
         yMangue = -yMangue
-    if orange.x > 1230 or orange.y > 870 or orange.x < -150 or orange.y < -150:
+    if orange.x > 1330 or orange.y > 970 or orange.x < -250 or orange.y < -250:
         orange.x =  int(random.choice([300,500,700,900]))
         orange.y = 670
         xOrange = -xOrange
         yOrange = -yOrange
-    if pasteque.x > 1230 or pasteque.y > 870 or pasteque.x < -150 or pasteque.y < -150:
+    if pasteque.x > 1330 or pasteque.y > 970 or pasteque.x < -250 or pasteque.y < -250:
         pasteque.x = 1030
         pasteque.y = int(random.choice([200,300,500]))
         xPasteque = -xPasteque
         yPasteque = -yPasteque
-    if poire.x > 1230 or poire.y > 870 or poire.x < -150 or poire.y < -150:
+    if poire.x > 1330 or poire.y > 970 or poire.x < -250 or poire.y < -250:
         poire.x = 1030
         poire.y = int(random.choice([100,400,600]))
         xPoire = -xPoire
         yPoire = -yPoire
-    
+
+    """------------------------- R E L I A B I L I T Y --------------------------------
+        E N S U R I N G  T W O  A S S E T S  D O N'T  S T A Y  B L O C K E D  T O G E T H E R
+    """
+
+    if collicount > 100:
+        abricot.x = int(random.choice([200,400,600,800]))
+        abricot.y = 0
+        banane.x = int(random.choice([300,500,700,900]))
+        banane.y = 0
+        figue.x = 0
+        figue.y = int(random.choice([100,400,600]))
+        fraise.x = 0
+        fraise.y = int(random.choice([200,300,500]))
+        mangue.x = int(random.choice([200,400,600,800]))
+        mangue.y = 670
+        orange.x =  int(random.choice([300,500,700,900]))
+        orange.y = 670
+        pasteque.x = 1030
+        pasteque.y = int(random.choice([200,300,500]))
+        poire.x = 1030
+        poire.y = int(random.choice([100,400,600]))
+        collicount = 0
+
+
+
     clock = pygame.time.Clock()
     clock.tick(60)
 
