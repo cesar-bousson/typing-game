@@ -6,26 +6,26 @@ pygame.init()
 WIDTH = 1080
 HEIGHT = 720
 screen = pygame.display.set_mode((WIDTH,HEIGHT))
-"""
-xrAbricot = int(random.choice([90,240,480,640,800,990]))
+
+xrAbricot = int(random.choice([200,400,600,800]))
 yrAbricot = 0
-xrBanane = int(random.choice([180,360,540,720,900,1080]))
+xrBanane = int(random.choice([300,500,700,900]))
 yrBanane = 0
 
 xrFigue = 0 
-yrFigue = int(random.choice([90,180,480,640]))
+yrFigue = int(random.choice([100,400,600]))
 xrFraise = 0
-yrFraise = int(random.choice([180,360,540,720]))
+yrFraise = int(random.choice([200,300,500]))
 
-xrMangue = int(random.choice([90,240,480,640,800,990]))
-yrMangue = 720
-xrOrange = int(random.choice([180,360,540,720,900,1080]))
-yrOrange = 720
+xrMangue = int(random.choice([200,400,600,800]))
+yrMangue = 670
+xrOrange = int(random.choice([300,500,700,900]))
+yrOrange = 670
 
-xrPasteque = 1080
-yrPasteque = int(random.choice([90,180,480,640]))
-xrPoire = 1080
-yrPoire = int(random.choice([180,360,540,720]))
+xrPasteque = 1030
+yrPasteque = int(random.choice([100,400,600]))
+xrPoire = 1030
+yrPoire = int(random.choice([200,300,500]))
 
 abricot = pygame.Rect(xrAbricot,yrAbricot,50,50)
 banane = pygame.Rect(xrBanane,yrBanane,50,50)
@@ -35,32 +35,12 @@ mangue = pygame.Rect(xrMangue,yrMangue,50,50)
 orange = pygame.Rect(xrOrange,yrOrange,50,50)
 pasteque = pygame.Rect(xrPasteque,yrPasteque,50,50)
 poire = pygame.Rect(xrPoire,yrPoire,50,50)
-"""
-
-"""
-xRandTOP = int(random.choice([0,180,360,540,720,900,1080]))
-yRandTOP = 0
-xRandDOWN = int(random.choice([0,180,360,540,720,900,1080]))
-yRandDOWN = 720
-xRandLEFT = 0
-yRandLEFT = int(random.choice([0,180,360,540,720]))
-xRandRIGHT = 1080
-yRandRIGHT = int(random.choice([0,180,360,540,720]))
-
-abricot = pygame.Rect(xRandTOP,yRandTOP,50,50)
-banane = pygame.Rect(xRandTOP,yRandTOP,50,50)
-figue = pygame.Rect(xRandLEFT,yRandLEFT,50,50)
-fraise = pygame.Rect(xRandLEFT,yRandLEFT,50,50)
-mangue = pygame.Rect(xRandDOWN,yRandDOWN,50,50)
-orange = pygame.Rect(xRandDOWN,yRandDOWN,50,50)
-pasteque = pygame.Rect(xRandRIGHT,yRandRIGHT,50,50)
-poire = pygame.Rect(xRandRIGHT,yRandRIGHT,50,50)
 
 colliders = [abricot,banane,figue,fraise,mangue,orange,pasteque,poire]
 
 xRandom = 0
 yRandom = 0
-"""
+
 xAbricot = -2
 yAbricot = -2
 xBanane = -2
@@ -86,42 +66,9 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    
-    xrAbricot = int(random.choice([200,400,600,800]))
-    yrAbricot = 0
-    xrBanane = int(random.choice([300,500,700,900]))
-    yrBanane = 0
-
-    xrFigue = 0 
-    yrFigue = int(random.choice([100,400,600]))
-    xrFraise = 0
-    yrFraise = int(random.choice([200,300,500]))
-
-    xrMangue = int(random.choice([200,400,600,800]))
-    yrMangue = 670
-    xrOrange = int(random.choice([300,500,700,900]))
-    yrOrange = 670
-
-    xrPasteque = 1030
-    yrPasteque = int(random.choice([100,400,600]))
-    xrPoire = 1030
-    yrPoire = int(random.choice([200,300,500]))
-
-    abricot = pygame.Rect(xrAbricot,yrAbricot,50,50)
-    banane = pygame.Rect(xrBanane,yrBanane,50,50)
-    figue = pygame.Rect(xrFigue,yrFigue,50,50)
-    fraise = pygame.Rect(xrFraise,yrFraise,50,50)
-    mangue = pygame.Rect(xrMangue,yrMangue,50,50)
-    orange = pygame.Rect(xrOrange,yrOrange,50,50)
-    pasteque = pygame.Rect(xrPasteque,yrPasteque,50,50)
-    poire = pygame.Rect(xrPoire,yrPoire,50,50)
-
-
-    colliders = [abricot,banane,figue,fraise,mangue,orange,pasteque,poire]
-
     xRandom = 0
     yRandom = 0
-    """
+    """    
     xAbricot = -2
     yAbricot = -2
     xBanane = -2
