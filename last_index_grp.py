@@ -42,7 +42,7 @@ def draw_fruits(fruits, images):
         screen.blit(images[fruit], rect.topleft)
         text = font.render(fruit[0].upper(), True, (255, 255, 255))
         screen.blit(text, (rect.x + 40, rect.y + 40))
-
+        
 def respawn_fruit(fruit, rect):
     rect.x = random.choice([100, 200, 300, 400])
     rect.y = random.randint(50, HEIGHT-100)
