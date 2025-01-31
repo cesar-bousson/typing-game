@@ -33,16 +33,35 @@ yrPear= int(random.choice([200,300,500]))
 
 """------------------- R E C T   I N I T A L I Z A T I O N -------------------------"""
 
-apricot = pygame.Rect(xrApricot,yrApricot,50,50)
-banana = pygame.Rect(xrBanana,yrBanana,50,50)
-fig = pygame.Rect(xrFig,yrFig,50,50)
-Strawberry = pygame.Rect(xrStrawberry,yrStrawberry,50,50)
-mango = pygame.Rect(xrMango,yrMango,50,50)
-orange = pygame.Rect(xrOrange,yrOrange,50,50)
-Watermelon = pygame.Rect(xrWatermelon,yrWatermelon,50,50)
-pear= pygame.Rect(xrPear,yrPear,50,50)
+apricot = pygame.Rect(xrApricot,yrApricot,100,100)
+banana = pygame.Rect(xrBanana,yrBanana,100,100)
+fig = pygame.Rect(xrFig,yrFig,100,100)
+strawberry = pygame.Rect(xrStrawberry,yrStrawberry,100,100)
+mango = pygame.Rect(xrMango,yrMango,100,100)
+orange = pygame.Rect(xrOrange,yrOrange,100,100)
+watermelon = pygame.Rect(xrWatermelon,yrWatermelon,100,100)
+pear= pygame.Rect(xrPear,yrPear,100,100)
 
-colliders = [apricot,banana,fig,Strawberry,mango,orange,Watermelon,pear]
+imgApricot = pygame.image.load("assets/assets_2/apricot.png")
+imgBanana = pygame.image.load("assets/assets_2/banana.png")
+imgFig = pygame.image.load("assets/assets_2/fig.png")
+imgStrawberry = pygame.image.load("assets/assets_2/strawberry.png")
+imgMango = pygame.image.load("assets/assets_2/mango.png")
+imgOrange = pygame.image.load("assets/assets_2/orange.png")
+imgWatermelon = pygame.image.load("assets/assets_2/watermelon.png")
+imgPear = pygame.image.load("assets/assets_2/pear.png")
+
+imgApricot = pygame.transform.scale(imgApricot, (apricot.width, apricot.height))
+imgBanana = pygame.transform.scale(imgBanana, (banana.width, banana.height))
+imgFig = pygame.transform.scale(imgFig, (fig.width, fig.height))
+imgStrawberry = pygame.transform.scale(imgStrawberry, (strawberry.width, strawberry.height))
+imgMango = pygame.transform.scale(imgMango, (mango.width, mango.height))
+imgOrange = pygame.transform.scale(imgOrange, (orange.width, orange.height))
+imgWatermelon = pygame.transform.scale(imgWatermelon, (watermelon.width, watermelon.height))
+imgPear = pygame.transform.scale(imgPear, (pear.width, pear.height))
+
+
+colliders = [apricot,banana,fig,strawberry,mango,orange,watermelon,pear]
 
 xRandom = 0
 yRandom = 0
@@ -82,49 +101,49 @@ while running:
     
     """---------------------------- C O N T A C T  M A N A G E M E N T --------------------------------"""
 
-    if apricot.collidelist([banana,fig,Strawberry,mango,orange,Watermelon,pear]) != -1:
+    if apricot.collidelist([banana,fig,strawberry,mango,orange,watermelon,pear]) != -1:
         collicount += 1
         print(collicount)
         xApricot = -xApricot
         yApricot = -yApricot
     
-    if banana.collidelist([apricot,fig,Strawberry,mango,orange,Watermelon,pear]) != -1:
+    if banana.collidelist([apricot,fig,strawberry,mango,orange,watermelon,pear]) != -1:
         collicount += 1
         print(collicount)
         xBanana = -xBanana
         yBanana = -yBanana
     
-    if fig.collidelist([apricot,banana,Strawberry,mango,orange,Watermelon,pear]) != -1:
+    if fig.collidelist([apricot,banana,strawberry,mango,orange,watermelon,pear]) != -1:
         collicount += 1
         print(collicount)
         xFig = -xFig
         yFig = -yFig
 
-    if Strawberry.collidelist([apricot,banana,fig,mango,orange,Watermelon,pear]) != -1:
+    if strawberry.collidelist([apricot,banana,fig,mango,orange,watermelon,pear]) != -1:
         collicount += 1
         print(collicount)
         xStrawberry = -xStrawberry
         yStrawberry = -yStrawberry
 
-    if mango.collidelist([apricot,banana,fig,Strawberry,orange,Watermelon,pear]) != -1:
+    if mango.collidelist([apricot,banana,fig,strawberry,orange,watermelon,pear]) != -1:
         collicount += 1
         print(collicount)
         xMango = -xMango
         yMango = -yMango
 
-    if orange.collidelist([apricot,banana,fig,Strawberry,mango,Watermelon,pear]) != -1:
+    if orange.collidelist([apricot,banana,fig,strawberry,mango,watermelon,pear]) != -1:
         collicount += 1
         print(collicount)
         xOrange = -xOrange
         yOrange = -yOrange
 
-    if Watermelon.collidelist([apricot,banana,fig,Strawberry,mango,orange,pear]) != -1:
+    if watermelon.collidelist([apricot,banana,fig,strawberry,mango,orange,pear]) != -1:
         collicount += 1
         print(collicount)
         xWatermelon = -xWatermelon
         yWatermelon = -yWatermelon
         
-    if pear.collidelist([apricot,banana,fig,Strawberry,mango,orange,Watermelon]) != -1:
+    if pear.collidelist([apricot,banana,fig,strawberry,mango,orange,watermelon]) != -1:
         collicount += 1
         print(collicount)
         xPear= -xPear
@@ -136,15 +155,25 @@ while running:
     apricot.move_ip(xApricot,yApricot)
     banana.move_ip(xBanana,yBanana)
     fig.move_ip(xFig,yFig)
-    Strawberry.move_ip(xStrawberry,yStrawberry)
+    strawberry.move_ip(xStrawberry,yStrawberry)
     mango.move_ip(xMango,yMango)
     orange.move_ip(xOrange,yOrange)
-    Watermelon.move_ip(xWatermelon,yWatermelon)
+    watermelon.move_ip(xWatermelon,yWatermelon)
     pear.move_ip(xPear,yPear)
 
     """------------ ---- D I S P L A Y I N G   R E C T A N G L E S ------------------"""
     
-    
+    screen.blit(imgApricot, apricot.topleft)
+    screen.blit(imgBanana, banana.topleft)
+    screen.blit(imgFig, fig.topleft)
+    screen.blit(imgStrawberry, strawberry.topleft)
+    screen.blit(imgMango, mango.topleft)
+    screen.blit(imgOrange, orange.topleft)
+    screen.blit(imgWatermelon, watermelon.topleft)
+    screen.blit(imgPear, pear.topleft)
+
+
+    """
     pygame.draw.rect(screen,(255,100,0),apricot,2)
     pygame.draw.rect(screen,(255,255,0),banana,2)
     pygame.draw.rect(screen,(255,0,100),fig,2)
@@ -153,7 +182,7 @@ while running:
     pygame.draw.rect(screen,(0,255,0),orange,2)
     pygame.draw.rect(screen,(0,0,255),Watermelon,2)
     pygame.draw.rect(screen,(0,150,250),pear,2)
-
+    """
     
     # banana = pygame.image.load("Assets/banana.png")
     # fig = pygame.image.load("Assets/fig.png")
@@ -182,9 +211,9 @@ while running:
         fig.y = int(random.choice([100,400,600]))
         xFig = -xFig
         yFig = -yFig
-    if Strawberry.x > 1330 or Strawberry.y > 970 or Strawberry.x < -250 or Strawberry.y < -250:
-        Strawberry.x = 0
-        Strawberry.y = int(random.choice([200,300,500]))
+    if strawberry.x > 1330 or strawberry.y > 970 or strawberry.x < -250 or strawberry.y < -250:
+        strawberry.x = 0
+        strawberry.y = int(random.choice([200,300,500]))
         xStrawberry = -xStrawberry
         yStrawberry = -yStrawberry
     if mango.x > 1330 or mango.y > 970 or mango.x < -250 or mango.y < -250:
@@ -197,9 +226,9 @@ while running:
         orange.y = 670
         xOrange = -xOrange
         yOrange = -yOrange
-    if Watermelon.x > 1330 or Watermelon.y > 970 or Watermelon.x < -250 or Watermelon.y < -250:
-        Watermelon.x = 1030
-        Watermelon.y = int(random.choice([200,300,500]))
+    if watermelon.x > 1330 or watermelon.y > 970 or watermelon.x < -250 or watermelon.y < -250:
+        watermelon.x = 1030
+        watermelon.y = int(random.choice([200,300,500]))
         xWatermelon = -xWatermelon
         yWatermelon = -yWatermelon
     if pear.x > 1330 or pear.y > 970 or pear.x < -250 or pear.y < -250:
@@ -219,20 +248,20 @@ while running:
         banana.y = 0
         fig.x = 0
         fig.y = int(random.choice([100,400,600]))
-        Strawberry.x = 0
-        Strawberry.y = int(random.choice([200,300,500]))
+        strawberry.x = 0
+        strawberry.y = int(random.choice([200,300,500]))
         mango.x = int(random.choice([200,400,600,800]))
         mango.y = 670
         orange.x =  int(random.choice([300,500,700,900]))
         orange.y = 670
-        Watermelon.x = 1030
-        Watermelon.y = int(random.choice([200,300,500]))
+        watermelon.x = 1030
+        watermelon.y = int(random.choice([200,300,500]))
         pear.x = 1030
         pear.y = int(random.choice([100,400,600]))
         collicount = 0
 
     clock = pygame.time.Clock()
-    clock.tick(120)
+    clock.tick(500)
 
     pygame.display.update()
 
