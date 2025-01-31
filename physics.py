@@ -3,9 +3,17 @@ import random
 
 pygame.init()
 
-WIDTH = 1080
-HEIGHT = 720
-screen = pygame.display.set_mode((WIDTH,HEIGHT))
+WIDTH = 700
+HEIGHT = 900
+
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+background = pygame.image.load("assets/bg/mixer.png")
+bg_width, bg_height = background.get_width(), background.get_height()
+center_x = (bg_width - WIDTH) //2
+center_y = (bg_height - HEIGHT) //2
+
+screen.blit (background, (center_x, center_y))
+
 
 collicount = 0
 
@@ -30,6 +38,8 @@ xrWatermelon = 1030
 yrWatermelon = int(random.choice([100,400,600]))
 xrPear= 1030
 yrPear= int(random.choice([200,300,500]))
+
+
 
 """------------------- R E C T   I N I T A L I Z A T I O N -------------------------"""
 
@@ -259,7 +269,8 @@ while running:
         pear.x = 1030
         pear.y = int(random.choice([100,400,600]))
         collicount = 0
-
+    
+    
     clock = pygame.time.Clock()
     clock.tick(500)
 

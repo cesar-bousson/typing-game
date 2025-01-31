@@ -12,50 +12,37 @@ pygame.display.set_caption("Fruit Collision Simulation")
 collicount = 0
 clock = pygame.time.Clock()
 
-# Liste des positions initiales pour les fruits
-spawn_positions = {
-    "top": [(200, 0), (400, 0), (600, 0), (800, 0)],
-    "left": [(0, 100), (0, 400), (0, 600)],
-    "bottom": [(200, 670), (400, 670), (600, 670), (800, 670)],
-    "right": [(1030, 100), (1030, 400), (1030, 600)]
-}
-
-# Chargement des images
+# Chargement des images et redimensionnement
 fruit_images = {
-    "apricot": pygame.image.load("assets/assets_2/apricot.png"),
-    "banana": pygame.image.load("assets/assets_2/banana.png"),
-    "fig": pygame.image.load("assets/assets_2/fig.png"),
-    "strawberry": pygame.image.load("assets/assets_2/strawberry.png"),
-    "mango": pygame.image.load("assets/assets_2/mango.png"),
-    "orange": pygame.image.load("assets/assets_2/orange.png"),
-    "watermelon": pygame.image.load("assets/assets_2/watermelon.png"),
-    "pear": pygame.image.load("assets/assets_2/pear.png")
+    "apricot": pygame.transform.scale(pygame.image.load("assets/assets_2/apricot.png"), (50, 50)),
+    "banana": pygame.transform.scale(pygame.image.load("assets/assets_2/banana.png"), (50, 50)),
+    "fig": pygame.transform.scale(pygame.image.load("assets/assets_2/fig.png"), (50, 50)),
+    "strawberry": pygame.transform.scale(pygame.image.load("assets/assets_2/strawberry.png"), (50, 50)),
+    "mango": pygame.transform.scale(pygame.image.load("assets/assets_2/mango.png"), (50, 50)),
+    "orange": pygame.transform.scale(pygame.image.load("assets/assets_2/orange.png"), (50, 50)),
+    "watermelon": pygame.transform.scale(pygame.image.load("assets/assets_2/watermelon.png"), (50, 50)),
+    "pear": pygame.transform.scale(pygame.image.load("assets/assets_2/pear.png"), (50, 50))
 }
 
-
-# Définition des fruits et de leurs propriétés
-
-fruits = {
-    "apricot": {"pos": random.choice(spawn_positions["top"]), "speed": [-2, -2]},
-    "banana": {"pos": random.choice(spawn_positions["top"]), "speed": [-2, 2]},
-    "fig": {"pos": random.choice(spawn_positions["left"]), "speed": [2, 0]},
-    "strawberry": {"pos": random.choice(spawn_positions["left"]), "speed": [1, 2]},
-    "mango": {"pos": random.choice(spawn_positions["bottom"]), "speed": [2, 2]},
-    "orange": {"pos": random.choice(spawn_positions["bottom"]), "speed": [2, 1]},
-    "watermelon": {"pos": random.choice(spawn_positions["right"]), "speed": [-2, 2]},
-    "pear": {"pos": random.choice(spawn_positions["right"]), "speed": [-1, -1]}
+# Positions de départ des fruits
+fruit_positions = {
+    "apricot": pygame.Rect(200, 0, 50, 50),
+    "banana": pygame.Rect(300, 0, 50, 50),
+    "fig": pygame.Rect(0, 100, 50, 50),
+    "strawberry": pygame.Rect(0, 200, 50, 50),
+    "mango": pygame.Rect(200, 670, 50, 50),
+    "orange": pygame.Rect(300, 670, 50, 50),
+    "watermelon": pygame.Rect(500, 100, 50, 50),
+    "pear": pygame.Rect(500, 200, 50, 50)
 }
-#resize image
-for key in fruit_images:
-    fruit_images[key] = pygame.transform.scale(fruit_images[key], (100, 100))
-    
-# Création des objets Rect en fonction de la taille des images
-for name, fruit in fruits.items():
-    img = fruit_images[name]
-    fruit["rect"] = pygame.Rect(fruit["pos"][0], fruit["pos"][1], img.get_width(), img.get_height())
 
-# Liste des colliders
-colliders = [fruits[name]["rect"] for name in fruits]
+# Création des objets fruits
+fruits = {}
+for name, rect in fruit_positions.items():
+    fruits[name] = {
+        "rect": rect,
+        "speed": [random.choice([-2, 2]), random.choice([-2, 2])]
+    }
 
 running = True
 while running:
@@ -71,31 +58,35 @@ while running:
         rect = fruit["rect"]
         speed = fruit["speed"]
 
-        if rect.collidelist(colliders) != -1:
+        # Vérification des collisions
+        other_rects = [fruits[k]["rect"] for k in fruits if k != name]  # Exclure le fruit lui-même
+        if rect.collidelist(other_rects) != -1:
             collicount += 1
-            print(collicount)
+            print(f"Collision {collicount}: {name}")
             speed[0] = -speed[0]
             speed[1] = -speed[1]
 
         # Déplacement des fruits
         rect.move_ip(speed[0], speed[1])
 
-        # Affichage des images
-        screen.blit(fruit_images[name], (rect.x, rect.y))
-
         # Réinitialisation si hors écran
-        if rect.x > 950 or rect.y > 500 or rect.x < -250 or rect.y < -250:
-            fruit["rect"].x, fruit["rect"].y = random.choice(spawn_positions[random.choice(["top", "left", "bottom", "right"])])
+        if rect.x > WIDTH or rect.y > HEIGHT or rect.x < -50 or rect.y < -50:
+            new_pos = random.choice(list(fruit_positions.values()))
+            rect.topleft = (new_pos.x, new_pos.y)
             fruit["speed"][0] = -fruit["speed"][0]
             fruit["speed"][1] = -fruit["speed"][1]
+
+        # Affichage des images
+        screen.blit(fruit_images[name], (rect.x, rect.y))
 
     # Réinitialisation si trop de collisions
     if collicount > 100:
         for name, fruit in fruits.items():
-            fruit["rect"].x, fruit["rect"].y = random.choice(spawn_positions[random.choice(["top", "left", "bottom", "right"])])
+            new_pos = random.choice(list(fruit_positions.values()))
+            fruit["rect"].topleft = (new_pos.x, new_pos.y)
         collicount = 0
 
     pygame.display.update()
-    clock.tick(120)
+    clock.tick(60)
 
 pygame.quit()
