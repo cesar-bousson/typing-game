@@ -11,60 +11,60 @@ collicount = 0
 
 """----------------------- S P A W N I N G  M A N A G E M E N T ----------------------------"""
 
-xrAbricot = int(random.choice([200,400,600,800]))
-yrAbricot = 0
-xrBanane = int(random.choice([300,500,700,900]))
-yrBanane = 0
+xrApricot = int(random.choice([200,400,600,800]))
+yrApricot = 0
+xrBanana = int(random.choice([300,500,700,900]))
+yrBanana = 0
 
-xrFigue = 0 
-yrFigue = int(random.choice([100,400,600]))
-xrFraise = 0
-yrFraise = int(random.choice([200,300,500]))
+xrFig = 0 
+yrFig = int(random.choice([100,400,600]))
+xrStrawberry = 0
+yrStrawberry = int(random.choice([200,300,500]))
 
-xrMangue = int(random.choice([200,400,600,800]))
-yrMangue = 670
+xrMango = int(random.choice([200,400,600,800]))
+yrMango = 670
 xrOrange = int(random.choice([300,500,700,900]))
 yrOrange = 670
 
-xrPasteque = 1030
-yrPasteque = int(random.choice([100,400,600]))
-xrPoire = 1030
-yrPoire = int(random.choice([200,300,500]))
+xrWatermelon = 1030
+yrWatermelon = int(random.choice([100,400,600]))
+xrPear= 1030
+yrPear= int(random.choice([200,300,500]))
 
 """------------------- R E C T   I N I T A L I Z A T I O N -------------------------"""
 
-abricot = pygame.Rect(xrAbricot,yrAbricot,50,50)
-banane = pygame.Rect(xrBanane,yrBanane,50,50)
-figue = pygame.Rect(xrFigue,yrFigue,50,50)
-fraise = pygame.Rect(xrFraise,yrFraise,50,50)
-mangue = pygame.Rect(xrMangue,yrMangue,50,50)
+apricot = pygame.Rect(xrApricot,yrApricot,50,50)
+banana = pygame.Rect(xrBanana,yrBanana,50,50)
+fig = pygame.Rect(xrFig,yrFig,50,50)
+Strawberry = pygame.Rect(xrStrawberry,yrStrawberry,50,50)
+mango = pygame.Rect(xrMango,yrMango,50,50)
 orange = pygame.Rect(xrOrange,yrOrange,50,50)
-pasteque = pygame.Rect(xrPasteque,yrPasteque,50,50)
-poire = pygame.Rect(xrPoire,yrPoire,50,50)
+Watermelon = pygame.Rect(xrWatermelon,yrWatermelon,50,50)
+pear= pygame.Rect(xrPear,yrPear,50,50)
 
-colliders = [abricot,banane,figue,fraise,mangue,orange,pasteque,poire]
+colliders = [apricot,banana,fig,Strawberry,mango,orange,Watermelon,pear]
 
 xRandom = 0
 yRandom = 0
 
 """---------------------------- M O V E M E N T  M A N A G E M E N T --------------------------------"""
 
-xAbricot = -2
-yAbricot = -2
-xBanane = -2
-yBanane = 2
-xFigue = 2
-yFigue = 0
-xFraise = 1
-yFraise = 2
-xMangue = 2
-yMangue = 2
+xApricot = -2
+yApricot = -2
+xBanana = -2
+yBanana = 2
+xFig = 2
+yFig = 0
+xStrawberry = 1
+yStrawberry = 2
+xMango = 2
+yMango = 2
 xOrange = 2
 yOrange = 1
-xPasteque = -2
-yPasteque = 2
-xPoire = -1
-yPoire = -1
+xWatermelon = -2
+yWatermelon = 2
+xPear= -1
+yPear= -1
 
 """------------------------------------ G A M E  L O O P ------------------------------------------"""
 
@@ -82,141 +82,153 @@ while running:
     
     """---------------------------- C O N T A C T  M A N A G E M E N T --------------------------------"""
 
-    if abricot.collidelist([banane,figue,fraise,mangue,orange,pasteque,poire]) != -1:
+    if apricot.collidelist([banana,fig,Strawberry,mango,orange,Watermelon,pear]) != -1:
         collicount += 1
         print(collicount)
-        xAbricot = -xAbricot
-        yAbricot = -yAbricot
+        xApricot = -xApricot
+        yApricot = -yApricot
     
-    if banane.collidelist([abricot,figue,fraise,mangue,orange,pasteque,poire]) != -1:
+    if banana.collidelist([apricot,fig,Strawberry,mango,orange,Watermelon,pear]) != -1:
         collicount += 1
         print(collicount)
-        xBanane = -xBanane
-        yBanane = -yBanane
+        xBanana = -xBanana
+        yBanana = -yBanana
     
-    if figue.collidelist([abricot,banane,fraise,mangue,orange,pasteque,poire]) != -1:
+    if fig.collidelist([apricot,banana,Strawberry,mango,orange,Watermelon,pear]) != -1:
         collicount += 1
         print(collicount)
-        xFigue = -xFigue
-        yFigue = -yFigue
+        xFig = -xFig
+        yFig = -yFig
 
-    if fraise.collidelist([abricot,banane,figue,mangue,orange,pasteque,poire]) != -1:
+    if Strawberry.collidelist([apricot,banana,fig,mango,orange,Watermelon,pear]) != -1:
         collicount += 1
         print(collicount)
-        xFraise = -xFraise
-        yFraise = -yFraise
+        xStrawberry = -xStrawberry
+        yStrawberry = -yStrawberry
 
-    if mangue.collidelist([abricot,banane,figue,fraise,orange,pasteque,poire]) != -1:
+    if mango.collidelist([apricot,banana,fig,Strawberry,orange,Watermelon,pear]) != -1:
         collicount += 1
         print(collicount)
-        xMangue = -xMangue
-        yMangue = -yMangue
+        xMango = -xMango
+        yMango = -yMango
 
-    if orange.collidelist([abricot,banane,figue,fraise,mangue,pasteque,poire]) != -1:
+    if orange.collidelist([apricot,banana,fig,Strawberry,mango,Watermelon,pear]) != -1:
         collicount += 1
         print(collicount)
         xOrange = -xOrange
         yOrange = -yOrange
 
-    if pasteque.collidelist([abricot,banane,figue,fraise,mangue,orange,poire]) != -1:
+    if Watermelon.collidelist([apricot,banana,fig,Strawberry,mango,orange,pear]) != -1:
         collicount += 1
         print(collicount)
-        xPasteque = -xPasteque
-        yPasteque = -yPasteque
+        xWatermelon = -xWatermelon
+        yWatermelon = -yWatermelon
         
-    if poire.collidelist([abricot,banane,figue,fraise,mangue,orange,pasteque]) != -1:
+    if pear.collidelist([apricot,banana,fig,Strawberry,mango,orange,Watermelon]) != -1:
         collicount += 1
         print(collicount)
-        xPoire = -xPoire
-        yPoire = -yPoire
+        xPear= -xPear
+        yPear= -yPear
     
 
     """---------------------------- M O V E M E N T S --------------------------------"""    
 
-    abricot.move_ip(xAbricot,yAbricot)
-    banane.move_ip(xBanane,yBanane)
-    figue.move_ip(xFigue,yFigue)
-    fraise.move_ip(xFraise,yFraise)
-    mangue.move_ip(xMangue,yMangue)
+    apricot.move_ip(xApricot,yApricot)
+    banana.move_ip(xBanana,yBanana)
+    fig.move_ip(xFig,yFig)
+    Strawberry.move_ip(xStrawberry,yStrawberry)
+    mango.move_ip(xMango,yMango)
     orange.move_ip(xOrange,yOrange)
-    pasteque.move_ip(xPasteque,yPasteque)
-    poire.move_ip(xPoire,yPoire)
+    Watermelon.move_ip(xWatermelon,yWatermelon)
+    pear.move_ip(xPear,yPear)
 
     """------------ ---- D I S P L A Y I N G   R E C T A N G L E S ------------------"""
-
-    pygame.draw.rect(screen,(255,100,0),abricot,2)
-    pygame.draw.rect(screen,(255,255,0),banane,2)
-    pygame.draw.rect(screen,(255,0,100),figue,2)
-    pygame.draw.rect(screen,(200,0,0),fraise,2)
-    pygame.draw.rect(screen,(0,200,100),mangue,2)
+    
+    
+    pygame.draw.rect(screen,(255,100,0),apricot,2)
+    pygame.draw.rect(screen,(255,255,0),banana,2)
+    pygame.draw.rect(screen,(255,0,100),fig,2)
+    pygame.draw.rect(screen,(200,0,0),Strawberry,2)
+    pygame.draw.rect(screen,(0,200,100),mango,2)
     pygame.draw.rect(screen,(0,255,0),orange,2)
-    pygame.draw.rect(screen,(0,0,255),pasteque,2)
-    pygame.draw.rect(screen,(0,150,250),poire,2)
+    pygame.draw.rect(screen,(0,0,255),Watermelon,2)
+    pygame.draw.rect(screen,(0,150,250),pear,2)
 
+    
+    # banana = pygame.image.load("Assets/banana.png")
+    # fig = pygame.image.load("Assets/fig.png")
+    # strawberry = pygame.image.load("Assets/mango.png")
+    # mango = pygame.image.load("Assets/orange.png")
+    # orange = pygame.image.load("Assets/pear.png")
+    # watermelon = pygame.image.load("Assets/strawberry.png")
+    # pear = pygame.image.load("Assets/watermelon.png")
+    
+    
+    
     """------------------- S P A W N I N G  M A N A G E M E N T ---------------------"""
 
-    if abricot.x > 1330 or abricot.y > 970 or abricot.x < -250 or abricot.y < -250:
-        abricot.x = int(random.choice([200,400,600,800]))
-        abricot.y = 0
-        xAbricot = -xAbricot
-        yAbricot = -yAbricot
-    if banane.x > 1330 or banane.y > 970 or banane.x < -250 or banane.y < -250:
-        banane.x = int(random.choice([300,500,700,900]))
-        banane.y = 0
-        xBanane = -xBanane
-        yBanane = -yBanane
-    if figue.x > 1330 or figue.y > 970 or figue.x < -250 or figue.y < -250:
-        figue.x = 0
-        figue.y = int(random.choice([100,400,600]))
-        xFigue = -xFigue
-        yFigue = -yFigue
-    if fraise.x > 1330 or fraise.y > 970 or fraise.x < -250 or fraise.y < -250:
-        fraise.x = 0
-        fraise.y = int(random.choice([200,300,500]))
-        xFraise = -xFraise
-        yFraise = -yFraise
-    if mangue.x > 1330 or mangue.y > 970 or mangue.x < -250 or mangue.y < -250:
-        mangue.x = int(random.choice([200,400,600,800]))
-        mangue.y = 670
-        xMangue = -xMangue
-        yMangue = -yMangue
+    if apricot.x > 1330 or apricot.y > 970 or apricot.x < -250 or apricot.y < -250:
+        apricot.x = int(random.choice([200,400,600,800]))
+        apricot.y = 0
+        xApricot = -xApricot
+        yApricot = -yApricot
+    if banana.x > 1330 or banana.y > 970 or banana.x < -250 or banana.y < -250:
+        banana.x = int(random.choice([300,500,700,900]))
+        banana.y = 0
+        xBanana = -xBanana
+        yBanana = -yBanana
+    if fig.x > 1330 or fig.y > 970 or fig.x < -250 or fig.y < -250:
+        fig.x = 0
+        fig.y = int(random.choice([100,400,600]))
+        xFig = -xFig
+        yFig = -yFig
+    if Strawberry.x > 1330 or Strawberry.y > 970 or Strawberry.x < -250 or Strawberry.y < -250:
+        Strawberry.x = 0
+        Strawberry.y = int(random.choice([200,300,500]))
+        xStrawberry = -xStrawberry
+        yStrawberry = -yStrawberry
+    if mango.x > 1330 or mango.y > 970 or mango.x < -250 or mango.y < -250:
+        mango.x = int(random.choice([200,400,600,800]))
+        mango.y = 670
+        xMango = -xMango
+        yMango = -yMango
     if orange.x > 1330 or orange.y > 970 or orange.x < -250 or orange.y < -250:
         orange.x =  int(random.choice([300,500,700,900]))
         orange.y = 670
         xOrange = -xOrange
         yOrange = -yOrange
-    if pasteque.x > 1330 or pasteque.y > 970 or pasteque.x < -250 or pasteque.y < -250:
-        pasteque.x = 1030
-        pasteque.y = int(random.choice([200,300,500]))
-        xPasteque = -xPasteque
-        yPasteque = -yPasteque
-    if poire.x > 1330 or poire.y > 970 or poire.x < -250 or poire.y < -250:
-        poire.x = 1030
-        poire.y = int(random.choice([100,400,600]))
-        xPoire = -xPoire
-        yPoire = -yPoire
+    if Watermelon.x > 1330 or Watermelon.y > 970 or Watermelon.x < -250 or Watermelon.y < -250:
+        Watermelon.x = 1030
+        Watermelon.y = int(random.choice([200,300,500]))
+        xWatermelon = -xWatermelon
+        yWatermelon = -yWatermelon
+    if pear.x > 1330 or pear.y > 970 or pear.x < -250 or pear.y < -250:
+        pear.x = 1030
+        pear.y = int(random.choice([100,400,600]))
+        xPear= -xPear
+        yPear= -yPear
 
     """------------------------- R E L I A B I L I T Y --------------------------------
      E N S U R I N G  T W O  A S S E T S  D O N'T  S T A Y  B L O C K E D  T O G H E T E R
     """
 
     if collicount > 100:
-        abricot.x = int(random.choice([200,400,600,800]))
-        abricot.y = 0
-        banane.x = int(random.choice([300,500,700,900]))
-        banane.y = 0
-        figue.x = 0
-        figue.y = int(random.choice([100,400,600]))
-        fraise.x = 0
-        fraise.y = int(random.choice([200,300,500]))
-        mangue.x = int(random.choice([200,400,600,800]))
-        mangue.y = 670
+        apricot.x = int(random.choice([200,400,600,800]))
+        apricot.y = 0
+        banana.x = int(random.choice([300,500,700,900]))
+        banana.y = 0
+        fig.x = 0
+        fig.y = int(random.choice([100,400,600]))
+        Strawberry.x = 0
+        Strawberry.y = int(random.choice([200,300,500]))
+        mango.x = int(random.choice([200,400,600,800]))
+        mango.y = 670
         orange.x =  int(random.choice([300,500,700,900]))
         orange.y = 670
-        pasteque.x = 1030
-        pasteque.y = int(random.choice([200,300,500]))
-        poire.x = 1030
-        poire.y = int(random.choice([100,400,600]))
+        Watermelon.x = 1030
+        Watermelon.y = int(random.choice([200,300,500]))
+        pear.x = 1030
+        pear.y = int(random.choice([100,400,600]))
         collicount = 0
 
     clock = pygame.time.Clock()
