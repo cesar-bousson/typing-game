@@ -3,79 +3,124 @@ import random
 
 pygame.init()
 
-WIDTH, HEIGHT = 800, 600
-WHITE = (255, 255, 255)
-
+WIDTH, HEIGHT = 500, 700
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-background = pygame.image.load("assets/pictures/background.png")
-pygame.display.set_caption("Fruity Slicer")
+pygame.display.set_caption("Fruit Mixer")
 
-fruit_images = [
-    pygame.image.load("assets/assets_2/apricot.png"), 
-    pygame.image.load("assets/assets_2/banana.png"),
-    pygame.image.load("assets/assets_2/mango.png"),
-    pygame.image.load("assets/assets_2/orange.png"),
-    pygame.image.load("assets/assets_2/pear.png"),
-    pygame.image.load("assets/assets_2/strawberry.png"),
-    pygame.image.load("assets/assets_2/watermelon.png")
-]
+background = pygame.image.load("assets/bg/mixer.png")
+background = pygame.transform.scale(background, (WIDTH, HEIGHT))
 
-ice_image = pygame.image.load("assets/pictures/asset.ice.png")
-bomb_image = pygame.image.load("assets/assets_2/fig.png")
-
-clock = pygame.time.Clock()
-fruits = []
-score = 0
-running = True
-
-def create_fruit():
-    image = random.choice(fruit_images + [ice_image, bomb_image])
-    x = random.randint(100, WIDTH - 100)
-    y = HEIGHT
-    speed = random.randint(5, 10)
-    rect = image.get_rect(center=(x, y))
-    return [image, x, y, speed, rect]
-
-def display_score():
-    font = pygame.font.SysFont('Arial', 30)
-    score_text = font.render(f"Score: {score}", True, WHITE)
-    screen.blit(score_text, (10, 10))
-
-while running:
+# Fonction pour afficher l'arrière-plan
+def draw_background():
     screen.blit(background, (0, 0))
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+# Fonction pour charger les fruits et leurs images
+def init_fruits():
+    positions_x = [100, 200, 300, 400]
+    positions_y = [100, 200, 300, 400, 500]
 
-    mouse_x, mouse_y = pygame.mouse.get_pos()
-    if pygame.mouse.get_pressed()[0]:
-        for fruit in fruits[:]:
-            image, x, y, speed, rect = fruit
-            if rect.collidepoint(mouse_x, mouse_y):
-                fruits.remove(fruit)
-                global score
-                score += 1
+    fruits = {
+        "apricot": pygame.Rect(random.choice(positions_x), 0, 100, 100),
+        "banana": pygame.Rect(random.choice(positions_x), 0, 100, 100),
+        "fig": pygame.Rect(0, random.choice(positions_y), 100, 100),
+        "strawberry": pygame.Rect(0, random.choice(positions_y), 100, 100),
+        "mango": pygame.Rect(random.choice(positions_x), HEIGHT - 100, 100, 100),
+        "orange": pygame.Rect(random.choice(positions_x), HEIGHT - 100, 100, 100),
+        "watermelon": pygame.Rect(WIDTH, random.choice(positions_y), 100, 100),
+        "pear": pygame.Rect(WIDTH, random.choice(positions_y), 100, 100),
+    }
+    
+    images = {fruit: pygame.transform.scale(pygame.image.load(f"assets/assets_2/{fruit}.png"), (100, 100)) for fruit in fruits}
 
-    if random.random() < 0.02:
-        fruits.append(create_fruit())
+    return fruits, images
 
-    for fruit in fruits[:]:
-        image, x, y, speed, rect = fruit
-        y -= speed
-        rect.center = (x, y)
+# Fonction pour déplacer les fruits
+def move_fruits(fruits, velocities):
+    for fruit, rect in fruits.items():
+        rect.move_ip(*velocities[fruit])
 
-        if y < 0:
-            fruits.remove(fruit)
-            score = max(0, score - 1)
-        else:
-            fruit[2] = y
-            fruit[4] = rect
+# Gérer les collisions entre les fruits
+def handle_collisions(fruits, velocities, collicount):
+    for fruit, rect in fruits.items():
+        if rect.collidelist([f for name, f in fruits.items() if name != fruit]) != -1:
+            collicount += 1
+            velocities[fruit] = (-velocities[fruit][0], -velocities[fruit][1])
+    return collicount
 
-        screen.blit(image, rect)
+# Afficher les fruits à l'écran
+def draw_fruits(fruits, images):
+    for fruit, rect in fruits.items():
+        screen.blit(images[fruit], rect.topleft)
 
-    display_score()
-    pygame.display.flip()
-    clock.tick(60)
+# Vérifier si un fruit sort de l'écran
+def respawn_fruit(fruit, rect, velocities):
+    if rect.x > WIDTH or rect.y > HEIGHT or rect.x < -100 or rect.y < -100:
+        rect.x = random.choice([100, 200, 300, 400]) if fruit != "fig" else 0
+        rect.y = 0 if fruit != "fig" else random.choice([100, 200, 300, 400])
+        velocities[fruit] = (random.choice([-2, 2]), random.choice([-2, 2]))
 
-pygame.quit()
+# Détecter une touche pressée pour capturer un fruit
+def check_key_press(event, fruits, score):
+    key_map = {
+        pygame.K_a: "apricot",
+        pygame.K_b: "banana",
+        pygame.K_f: "fig",
+        pygame.K_s: "strawberry",
+        pygame.K_m: "mango",
+        pygame.K_o: "orange",
+        pygame.K_w: "watermelon",
+        pygame.K_p: "pear"
+    }
+
+    if event.key in key_map:
+        fruit_name = key_map[event.key]
+        if fruit_name in fruits:
+            del fruits[fruit_name]
+            score += 1
+
+    return score
+
+# Afficher le score
+def draw_score(score):
+    font = pygame.font.Font(None, 36)
+    text = font.render(f"Score: {score}", True, (255, 255, 255))
+    screen.blit(text, (20, 20))
+
+# Fonction principale du jeu
+def main():
+    fruits, images = init_fruits()
+    velocities = {fruit: (random.choice([-2, 2]), random.choice([-2, 2])) for fruit in fruits}
+    collicount = 0
+    score = 0
+    running = True
+    clock = pygame.time.Clock()
+
+    while running:
+        screen.fill((0, 0, 0))  # Fond noir
+        draw_background()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            elif event.type == pygame.KEYDOWN:
+                score = check_key_press(event, fruits, score)
+
+        # Gérer les collisions et les déplacements
+        collicount = handle_collisions(fruits, velocities, collicount)
+        move_fruits(fruits, velocities)
+
+        # Affichage des fruits et score
+        draw_fruits(fruits, images)
+        draw_score(score)
+
+        # Vérifier si un fruit sort de l'écran et le réinitialiser
+        for fruit, rect in fruits.items():
+            respawn_fruit(fruit, rect, velocities)
+
+        pygame.display.update()
+        clock.tick(60)  # 60 FPS
+
+    pygame.quit()
+
+if __name__ == "__main__":
+    main()

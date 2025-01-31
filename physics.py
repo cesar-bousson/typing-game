@@ -9,10 +9,9 @@ HEIGHT = 900
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 background = pygame.image.load("assets/bg/mixer.png")
 bg_width, bg_height = background.get_width(), background.get_height()
-center_x = (bg_width - WIDTH) //2
-center_y = (bg_height - HEIGHT) //2
+center_x = (bg_width - WIDTH) // 2
+center_y = (bg_height - HEIGHT) // 2
 
-screen.blit (background, (center_x, center_y))
 
 
 collicount = 0
@@ -172,7 +171,7 @@ while running:
     pear.move_ip(xPear,yPear)
 
     """------------ ---- D I S P L A Y I N G   R E C T A N G L E S ------------------"""
-    
+    screen.blit(background, (center_x, center_y))
     screen.blit(imgApricot, apricot.topleft)
     screen.blit(imgBanana, banana.topleft)
     screen.blit(imgFig, fig.topleft)
@@ -181,27 +180,6 @@ while running:
     screen.blit(imgOrange, orange.topleft)
     screen.blit(imgWatermelon, watermelon.topleft)
     screen.blit(imgPear, pear.topleft)
-
-
-    """
-    pygame.draw.rect(screen,(255,100,0),apricot,2)
-    pygame.draw.rect(screen,(255,255,0),banana,2)
-    pygame.draw.rect(screen,(255,0,100),fig,2)
-    pygame.draw.rect(screen,(200,0,0),Strawberry,2)
-    pygame.draw.rect(screen,(0,200,100),mango,2)
-    pygame.draw.rect(screen,(0,255,0),orange,2)
-    pygame.draw.rect(screen,(0,0,255),Watermelon,2)
-    pygame.draw.rect(screen,(0,150,250),pear,2)
-    """
-    
-    # banana = pygame.image.load("Assets/banana.png")
-    # fig = pygame.image.load("Assets/fig.png")
-    # strawberry = pygame.image.load("Assets/mango.png")
-    # mango = pygame.image.load("Assets/orange.png")
-    # orange = pygame.image.load("Assets/pear.png")
-    # watermelon = pygame.image.load("Assets/strawberry.png")
-    # pear = pygame.image.load("Assets/watermelon.png")
-    
     
     
     """------------------- S P A W N I N G  M A N A G E M E N T ---------------------"""
