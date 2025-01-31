@@ -5,7 +5,26 @@ pygame.init()
 
 WIDTH = 1080
 HEIGHT = 720
-screen = pygame.display.set_mode((WIDTH,HEIGHT))
+
+background = pygame.image.load("assets/pictures/bg/bg_2.jpg")
+
+# Obtenir les dimensions originales de l'image
+img_width, img_height = background.get_size()
+
+# Calculer le facteur de mise à l'échelle
+ratio_width = WIDTH / img_width
+ratio_height = WIDTH / img_height
+scale_ratio = min(ratio_width, ratio_height)
+
+# Calculer les nouvelles dimensions
+new_width = int(img_width * scale_ratio)
+new_height = int(img_height * scale_ratio)
+
+screen = pygame.display.set_mode((new_width,new_height))
+pygame.display.set_caption("fruitx slicer")
+
+# Redimensionner l'image tout en préservant les proportions
+background = pygame.transform.scale(background, (new_width, new_height))
 
 collicount = 0
 
@@ -78,7 +97,7 @@ while running:
     xRandom = 0
     yRandom = 0
 
-    screen.fill((0,0,0))
+    screen.blit(background, (0, 0))
     
     """---------------------------- C O N T A C T  M A N A G E M E N T --------------------------------"""
 
