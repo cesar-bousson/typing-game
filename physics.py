@@ -68,7 +68,6 @@ yPoire = -1
 
 """------------------------------------ G A M E  L O O P ------------------------------------------"""
 
-
 running = True
 while running:
 
@@ -82,7 +81,6 @@ while running:
     screen.fill((0,0,0))
     
     """---------------------------- C O N T A C T  M A N A G E M E N T --------------------------------"""
-
 
     if abricot.collidelist([banane,figue,fraise,mangue,orange,pasteque,poire]) != -1:
         collicount += 1
@@ -133,10 +131,7 @@ while running:
         yPoire = -yPoire
     
 
-    """---------------------------- M O V E M E N T S --------------------------------"""
-
-
-    
+    """---------------------------- M O V E M E N T S --------------------------------"""    
 
     abricot.move_ip(xAbricot,yAbricot)
     banane.move_ip(xBanane,yBanane)
@@ -147,8 +142,7 @@ while running:
     pasteque.move_ip(xPasteque,yPasteque)
     poire.move_ip(xPoire,yPoire)
 
-    """---------------------------- D I S P L A Y --------------------------------"""
-
+    """------------ ---- D I S P L A Y I N G   R E C T A N G L E S ------------------"""
 
     pygame.draw.rect(screen,(255,100,0),abricot,2)
     pygame.draw.rect(screen,(255,255,0),banane,2)
@@ -158,7 +152,6 @@ while running:
     pygame.draw.rect(screen,(0,255,0),orange,2)
     pygame.draw.rect(screen,(0,0,255),pasteque,2)
     pygame.draw.rect(screen,(0,150,250),poire,2)
-
 
     """------------------- S P A W N I N G  M A N A G E M E N T ---------------------"""
 
@@ -204,7 +197,7 @@ while running:
         yPoire = -yPoire
 
     """------------------------- R E L I A B I L I T Y --------------------------------
-        E N S U R I N G  T W O  A S S E T S  D O N'T  S T A Y  B L O C K E D  T O G E T H E R
+     E N S U R I N G  T W O  A S S E T S  D O N'T  S T A Y  B L O C K E D  T O G H E T E R
     """
 
     if collicount > 100:
@@ -226,10 +219,8 @@ while running:
         poire.y = int(random.choice([100,400,600]))
         collicount = 0
 
-
-
     clock = pygame.time.Clock()
-    clock.tick(60)
+    clock.tick(120)
 
     pygame.display.update()
 
