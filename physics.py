@@ -129,7 +129,6 @@ while running:
         print(collicount)
         xPoire = -xPoire
         yPoire = -yPoire
-    
 
     """---------------------------- M O V E M E N T S --------------------------------"""    
 
@@ -142,7 +141,7 @@ while running:
     pasteque.move_ip(xPasteque,yPasteque)
     poire.move_ip(xPoire,yPoire)
 
-    """------------ ---- D I S P L A Y I N G   R E C T A N G L E S ------------------"""
+    """----------------- D I S P L A Y I N G   R E C T A N G L E S ------------------"""
 
     pygame.draw.rect(screen,(255,100,0),abricot,2)
     pygame.draw.rect(screen,(255,255,0),banane,2)
