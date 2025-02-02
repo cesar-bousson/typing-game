@@ -9,6 +9,9 @@ background = pygame.image.load("assets/bg/mixer.png")
 background = pygame.transform.scale(background, (WIDTH, HEIGHT))
 alt_background = pygame.image.load("assets/bg/explosion.jpg")
 alt_background = pygame.transform.scale(alt_background, (WIDTH, HEIGHT))
+ice_background = pygame.image.load("assets/bg/Ice.jpg")
+ice_background = pygame.transform.scale(ice_background, (WIDTH, HEIGHT))
+
 
 # Charger les sons
 fruit_sound = pygame.mixer.Sound("assets/sounds/zapsplat.cut.mp3")
@@ -61,6 +64,8 @@ def main():
     current_bg = background
     fig_hit = False
     fig_timer = 0
+    orange_hit = False
+    orange_timer = 0
 
     while running:
         screen.fill((0, 0, 0))
@@ -74,6 +79,14 @@ def main():
                 current_bg = background
                 fig_hit = False
                 fig_timer = 0
+        
+        if orange_hit:
+            orange_timer += 1
+            if orange_timer == 2:
+                pygame.time.delay(5000)
+                orange_hit = False
+                orange_timer = 0
+                current_bg = background
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -83,6 +96,12 @@ def main():
                     fruit_name = fruit_keys[event.key]
                     if fruit_name in fruits:
                         del fruits[fruit_name]  # Supprime le fruit de la liste
+                        if fruit_name == "orange":
+                            current_bg = ice_background
+                            orange_hit = True
+                            fig_sound.play()
+                            #pygame.time.delay(1000)
+                            
                         if fruit_name == "fig":
                             score -= 3
                             current_bg = alt_background
