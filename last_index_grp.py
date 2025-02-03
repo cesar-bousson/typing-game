@@ -98,12 +98,11 @@ def main():
                 if event.key in fruit_keys:
                     fruit_name = fruit_keys[event.key]
                     if fruit_name in fruits:
-                        del fruits[fruit_name]  # Supprime le fruit de la liste
+                        del fruits[fruit_name]  
                         if fruit_name == "orange":
                             current_bg = ice_background
                             orange_hit = True
                             orange_sound.play()
-                            #pygame.time.delay(1000)
                         if fruit_name == "fig":
                             score -= 3
                             current_bg = alt_background
