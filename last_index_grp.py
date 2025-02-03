@@ -3,25 +3,31 @@ import random
 
 pygame.init()
 
+# window & backgrounds: 
 WIDTH, HEIGHT = 500, 700
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 background = pygame.image.load("assets/bg/mixer.png")
 background = pygame.transform.scale(background, (WIDTH, HEIGHT))
+
 alt_background = pygame.image.load("assets/bg/explosion.jpg")
 alt_background = pygame.transform.scale(alt_background, (WIDTH, HEIGHT))
 ice_background = pygame.image.load("assets/bg/Ice.jpg")
 ice_background = pygame.transform.scale(ice_background, (WIDTH, HEIGHT))
 
+# variables ----------------------------------------------------------------------------------------
 
-# Charger les sons
+# load sounds:
 fruit_sound = pygame.mixer.Sound("assets/sounds/zapsplat.cut.mp3")
 fig_sound = pygame.mixer.Sound("assets/sounds/zapsplat.bomb.mp3")
+ice_sound = pygame.mixer.Sound("assets/sounds/ice.mp3")
 
-# Associer les fruits aux touches
-keys = [pygame.K_a, pygame.K_b, pygame.K_f, pygame.K_s, pygame.K_m, pygame.K_o, pygame.K_w, pygame.K_p]
-fruit_names = ["apricot", "banana", "fig", "strawberry", "mango", "orange", "watermelon", "pear"]
+# associate fruits to keyboards:
+keys = [pygame.K_a, pygame.K_b, pygame.K_f, pygame.K_s, pygame.K_m, pygame.K_o, pygame.K_w, pygame.K_p, pygame.K_i]
+fruit_names = ["apricot", "banana", "fig", "strawberry", "mango", "orange", "watermelon", "pear" , "ice"]
 fruit_keys = dict(zip(keys, fruit_names))
 
+
+# features ------------------------------------------------------------------------------------------
 def draw_background(current_bg):
     screen.blit(current_bg, (0, 0))
 
@@ -54,7 +60,8 @@ def draw_score(score):
     font = pygame.font.Font(None, 36)
     text = font.render(f"Score: {score}", True, (255, 255, 255))
     screen.blit(text, (20, 20))
-
+    
+# main loop---------------------------------------------------------------------------------
 def main():
     fruits, images = init_fruits()
     velocities = {fruit: [random.choice([-2, 2]), random.choice([-2, 2])] for fruit in fruit_names}
@@ -64,8 +71,8 @@ def main():
     current_bg = background
     fig_hit = False
     fig_timer = 0
-    orange_hit = False
-    orange_timer = 0
+    ice_hit = False
+    ice_timer = 0
 
     while running:
         screen.fill((0, 0, 0))
@@ -80,12 +87,12 @@ def main():
                 fig_hit = False
                 fig_timer = 0
         
-        if orange_hit:
-            orange_timer += 1
-            if orange_timer == 2:
+        if ice_hit:
+            ice_timer += 1
+            if ice_timer == 2:
                 pygame.time.delay(5000)
-                orange_hit = False
-                orange_timer = 0
+                ice_hit = False
+                ice_timer = 0
                 current_bg = background
 
         for event in pygame.event.get():
@@ -95,12 +102,12 @@ def main():
                 if event.key in fruit_keys:
                     fruit_name = fruit_keys[event.key]
                     if fruit_name in fruits:
-                        del fruits[fruit_name]  # Supprime le fruit de la liste
-                        if fruit_name == "orange":
+                        del fruits[fruit_name]  # erase fruit from list
+                        if fruit_name == "ice":
                             current_bg = ice_background
-                            orange_hit = True
-                            fig_sound.play()
-                            #pygame.time.delay(1000)
+                            ice_hit = True
+                            ice_sound.play()
+                            
                             
                         if fruit_name == "fig":
                             score -= 3
@@ -112,7 +119,7 @@ def main():
                             fruit_sound.play()
 
         move_fruits(fruits, velocities)
-        for fruit in list(fruits.keys()):  # Utilisation d'une copie des clés pour éviter les erreurs de modification
+        for fruit in list(fruits.keys()):  #using fruit key copy for less errors of change
             rect = fruits[fruit]
             if rect.x < -100 or rect.x > WIDTH or rect.y < -100 or rect.y > HEIGHT:
                 respawn_fruit(fruit, rect)
