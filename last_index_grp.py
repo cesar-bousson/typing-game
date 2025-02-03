@@ -85,7 +85,7 @@ def main():
     current_bg = background
     fig_hit = False
     fig_timer = 0
-    fig_count = 0
+    # fig_count = 0 to debug
     ice_hit = False
     ice_timer = 0
 
@@ -128,12 +128,11 @@ def main():
                             ice_sound.play()
                         elif fruit_name == "fig":
                             score -= 3
-                            fig_count += 1
                             current_bg = alt_background
                             fig_hit = True
                             fig_sound.play()
-                            if fig_count == 3:
-                                running = False
+                            #if fig_count == 3: need to fix bug here for exit game after losing game with bombs
+                                #running = False
                         else:
                             score += 1
                             fruit_sound.play()
