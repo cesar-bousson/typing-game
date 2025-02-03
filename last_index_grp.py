@@ -16,6 +16,7 @@ ice_background = pygame.transform.scale(ice_background, (WIDTH, HEIGHT))
 # Charger les sons
 fruit_sound = pygame.mixer.Sound("assets/sounds/zapsplat.cut.mp3")
 fig_sound = pygame.mixer.Sound("assets/sounds/zapsplat.bomb.mp3")
+orange_sound = pygame.mixer.Sound("assets/sounds/ice.mp3")
 
 # Associer les fruits aux touches
 keys = [pygame.K_a, pygame.K_b, pygame.K_f, pygame.K_s, pygame.K_m, pygame.K_o, pygame.K_w, pygame.K_p]
@@ -96,10 +97,11 @@ def main():
                     fruit_name = fruit_keys[event.key]
                     if fruit_name in fruits:
                         del fruits[fruit_name]  # Supprime le fruit de la liste
+                    
                         if fruit_name == "orange":
                             current_bg = ice_background
                             orange_hit = True
-                            fig_sound.play()
+                            orange_sound.play()
                             #pygame.time.delay(1000)
                             
                         if fruit_name == "fig":
@@ -109,6 +111,7 @@ def main():
                             fig_sound.play()
                         else:
                             score += 1
+                            respawn_fruit(fruit_name, rect)
                             fruit_sound.play()
 
         move_fruits(fruits, velocities)
