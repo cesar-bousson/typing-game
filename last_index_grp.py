@@ -64,6 +64,7 @@ def main():
     clock = pygame.time.Clock()
     current_bg = background
     fig_hit = False
+    fig_count = 0
     fig_timer = 0
     orange_hit = False
     orange_timer = 0
@@ -76,6 +77,7 @@ def main():
 
         if fig_hit:
             fig_timer += 1
+            fig_count += 1
             if fig_timer > 30:
                 current_bg = background
                 fig_hit = False
@@ -111,6 +113,9 @@ def main():
                             score += 1
                             respawn_fruit(fruit_name, rect)
                             fruit_sound.play()
+                        
+                        if fig_count == 3:
+                            running = False
 
         move_fruits(fruits, velocities)
         for fruit in list(fruits.keys()):  # Utilisation d'une copie des clés pour éviter les erreurs de modification
